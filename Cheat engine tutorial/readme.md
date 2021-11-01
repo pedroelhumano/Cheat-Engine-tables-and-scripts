@@ -1,9 +1,18 @@
 # Cheat engine tutorial (3.4)
+
 Todas las posiciones de memoria se en doc.md se basan en la versión 3.4, si esta versión cambiar es posible que sean otras posiciones de memoria, aunque los pasos sean diferentes.
 
 <table align='center'>
+<thead>
+  <tr>
+    <th>Step</th>
+    <th>Name</th>
+    <th>Password</th>
+    <th>Status</th>
+  </tr>
+</thead>
 <tbody>
-<tr>
+  <tr>
     <td>Step 2</td>
     <td>Exact Value scanning</td>
     <td>090453</td>

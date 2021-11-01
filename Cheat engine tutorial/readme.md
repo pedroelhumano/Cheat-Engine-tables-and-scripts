@@ -3,6 +3,7 @@
 Todas las posiciones de memoria se en doc.md se basan en la versión 3.4, si esta versión cambia es posible que sean otras posiciones de memoria, aunque los pasos sean iguales.
 
 ### Tutorial-i386
+
 <table align='center'>
 <thead>
   <tr>
@@ -35,12 +36,12 @@ Todas las posiciones de memoria se en doc.md se basan en la versión 3.4, si est
     <td>Step 5</td>
     <td>Code finder</td>
     <td>888899</td>
-    <td>❌</td>
+    <td>✅</td>
   </tr>
   <tr>
     <td>Step 6</td>
-    <td> - </td>
-    <td> - </td>
+    <td>Pointers</td>
+    <td>098712</td>
     <td>❌</td>
   </tr>
   <tr>

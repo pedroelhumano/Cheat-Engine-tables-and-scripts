@@ -7,8 +7,9 @@ En caso de un valor inicial desconocido, unicamente se cambia el primer scan a t
 Este ejercicio solo cambia en que la búsqueda debe hacerse bajo los parámetros que estamos tratando con valores de tipo flotande y doubles. Por lo que sigue siendo de fácil resolución ya que solo hay que cambiar el value type.
 ### Step 5.
 Este ejercicio entra ya en aspectos mas complejos de Cheat Engine. Simula, que cada vez que se reinicia una partida (Como puede ser que se carga una partida guardada) La información de una posición de memoria cambia y por ende no afectamos realmente el valor de la posición. La solución consta de varios pasos, una vez localizada la posición de memoria de donde se guarda la vida, le damos click derecho en las address ya guardadas y nos fijamos que tenemos 2 opciones con las teclas F5 y F6.
-- Find out what accesses this address
-- Find out what writes to this address
+- Find out what accesses this address.
+- Find out what writes to this address.
+
 El primero significa quien accede en modo solo lectura o bien para extraer alguna información, y el segundo quien sobre escribe información en esa posición.
 Para la solución de este ejercicio, nos solventamos en la segunda opción, quien sobre escribe y si hacemos click en el change value del programa, nos aparece la ejercicio de la linea de cogido en ASM que esta funcionando en este momento.
 Nos fijamos en la instrucción la cual dice:

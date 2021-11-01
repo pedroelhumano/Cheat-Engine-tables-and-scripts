@@ -1,5 +1,5 @@
 # Cheat engine tutorial (3.4)
-Todas las poccisiones de memoria se en doc.md se basan en la version 3.4, si esta version cambiar es posible que sean otras posiciones de memoria, aunque los pasos sean diferentes.
+Todas las posiciones de memoria se en doc.md se basan en la versión 3.4, si esta versión cambiar es posible que sean otras posiciones de memoria, aunque los pasos sean diferentes.
 
 <table align='center'>
 <tbody>

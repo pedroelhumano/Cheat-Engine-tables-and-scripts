@@ -1,7 +1,8 @@
 # Cheat engine tutorial (3.4)
 
-Todas las posiciones de memoria se en doc.md se basan en la versión 3.4, si esta versión cambiar es posible que sean otras posiciones de memoria, aunque los pasos sean diferentes.
+Todas las posiciones de memoria se en doc.md se basan en la versión 3.4, si esta versión cambia es posible que sean otras posiciones de memoria, aunque los pasos sean iguales.
 
+### Tutorial-i386
 <table align='center'>
 <thead>
   <tr>
@@ -22,12 +23,12 @@ Todas las posiciones de memoria se en doc.md se basan en la versión 3.4, si est
     <td>Step 3</td>
     <td>Unknown initial value</td>
     <td>419482</td>
-    <td>❌</td>
+    <td>✅</td>
   </tr>
   <tr>
     <td>Step 4</td>
-    <td> - </td>
-    <td> - </td>
+    <td>Floating points</td>
+    <td>890124</td>
     <td>❌</td>
   </tr>
   <tr>

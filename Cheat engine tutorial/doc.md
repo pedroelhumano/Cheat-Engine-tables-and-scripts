@@ -39,3 +39,35 @@ Copiamos todo ello y vamos al boton en la misma lista que dice: "add Address man
 
 De esta manera, la dirección:  `"Tutorial-i386.exe"+2566B0` En nuestra lista es nuestro puntero y la dirección que hemos agregado activando el pointer es el valor que esta transfiriendo el puntero. Ese es el que modificamos y al reiniciar el programa, sin importar que pase, esa ubicación nunca cambiara.
 ### Step 7.
+La inyección de código es otro aspecto importante en el gamehacking, inyectar un código que modifica otro. Tenemos un programa el cual al hacer click nos golpea una vez, nos exigen que al hacer click en vez de perder vida, sume 2 puntos. Se hace la misma formula de siempre y una vez agregada a la lista de address, se hace click derecho sobre ella y accedemos a `Find out what writes to this address.` Dentro, damos al botón click y vemos la posición de memoria que nos esta afectando nuestra vida, por lo que entramos en show dissambler para ver el código original en ASM.
+```asm
+sub dword ptr [ebx+000004A4],01
+```
+La instrucción SUB significa restar y vemos al final el 01 que indica el valor a restar.  Podemos solucionar este ejercicio muy fácilmente modificando esta instrucción directamente cambiando el el `sub` por `add` que indica una sumar, y modificamos el 01 por 02.
+
+Sin embargo, resolvamos esto por la manera dificil usando el code injector integrando en cheat engine. Para ellos desde la ventana del Memory View vamos al menu `Tools` -> `auto Assamble` (ctrl + A para los amigos) Se nos abrirá un editor de código. Cheat engine tiene integrado algunos templates de utilidad, por lo que en este editor vamos el menu `Template` -> `code injection`.
+
+No debemos confundirnos con la lectura ni verla demasiado complicada, observemos dos secciones importantes de momento. `originalcode:` Donde se ejecuta el código original y `newmem:` Donde se ejecutara nuestra inyección de código. Si ya lo abras supuesto, la solución aquí seria agregar un código que sume dos en newmen y eliminar el código de original. Para ello solo copiamos y pegamos en newmen el código original y cambiamos sub por add y el 01 por 02, mientras tanto en originalcode solo agregamos // para que quede comentada la linea.. Esto resuelve el ejercicio, solo damos ejecutar y el código quedara inyectado. El código queda así:
+
+```asm
+alloc(newmem,2048)
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+add dword ptr [ebx+000004A4],02
+
+originalcode:
+//sub dword ptr [ebx+000004A4],01
+
+exit:
+jmp returnhere
+
+"Tutorial-i386.exe"+278C3:
+jmp newmem
+nop 2
+returnhere:
+```
+### Step 8.

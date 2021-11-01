@@ -48,12 +48,12 @@ Todas las posiciones de memoria se en doc.md se basan en la versión 3.4, si est
     <td>Step 7</td>
     <td>Code Injection</td>
     <td>013370</td>
-    <td>❌</td>
+    <td>✅</td>
   </tr>
   <tr>
     <td>Step 8</td>
-    <td> - </td>
-    <td> - </td>
+    <td>Multilevel pointers</td>
+    <td>525927</td>
     <td>❌</td>
   </tr>
   <tr>

@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CheatTable CheatEngineTableVersion="38">
-  <CheatEntries/>
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"Step 6: Pointer Value"</Description>
+      <LastState Value="410" RealAddress="01712F90"/>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"Tutorial-i386.exe"+2566B0</Address>
+      <Offsets>
+        <Offset>0</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"Step 6: Pointer"</Description>
+      <LastState Value="01712F90" RealAddress="006566B0"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"Tutorial-i386.exe"+2566B0</Address>
+    </CheatEntry>
+  </CheatEntries>
   <UserdefinedSymbols/>
 </CheatTable>

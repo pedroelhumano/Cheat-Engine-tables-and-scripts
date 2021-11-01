@@ -15,7 +15,7 @@ Nos fijamos en la instrucción la cual dice:
 ```asm
 00426C12 - 89 10  - mov [eax],edx
 ```
-Esto quiere decir: mueve edx dentro de valor de eax. EDX y EAX son registro para sistemas de 32bits mientras que mov es la instrucción en ASM.
+Esto quiere decir: mueve el valor de edx en la posición de eax. EDX y EAX son registro para sistemas de 32bits mientras que mov es la instrucción en ASM.
 
 Si nos fijamos en el cuadro inferior indica que valor es cada uno donde (en mi caso):
 ```asm

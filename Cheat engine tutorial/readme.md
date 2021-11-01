@@ -29,12 +29,12 @@ Todas las posiciones de memoria se en doc.md se basan en la versión 3.4, si est
     <td>Step 4</td>
     <td>Floating points</td>
     <td>890124</td>
-    <td>❌</td>
+    <td>✅</td>
   </tr>
   <tr>
     <td>Step 5</td>
-    <td> - </td>
-    <td> - </td>
+    <td>Code finder</td>
+    <td>888899</td>
     <td>❌</td>
   </tr>
   <tr>

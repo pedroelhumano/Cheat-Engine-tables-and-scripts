@@ -4,3 +4,5 @@ Scan con exact value y next value. Cheat engine guarda en las address las posici
 ### Step 3.
 En caso de un valor inicial desconocido, unicamente se cambia el primer scan a tipo de búsqueda a Unknown initial value, posterior a ello, solo vamos jugando con las opciones que ofrece cheat engine como buscar un valor que se decrementa o que cambia, hasta rastrear la posición de memoria, en este caso, vuelve a ser una posición de memoria estática.
 ### Step 4.
+Este ejercicio solo cambia en que la búsqueda debe hacerse bajo los parámetros que estamos tratando con valores de tipo flotande y doubles. Por lo que sigue siendo de fácil resolución ya que solo hay que cambiar el value type.
+### Step 5.

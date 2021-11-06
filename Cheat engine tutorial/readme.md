@@ -54,12 +54,12 @@ Todas las posiciones de memoria en doc.md se basan en la versión 3.5, si esta v
     <td>Step 8</td>
     <td>Multilevel pointers</td>
     <td>525927</td>
-    <td>❌</td>
+    <td>✅</td>
   </tr>
   <tr>
     <td>Step 9</td>
-    <td> - </td>
-    <td> - </td>
+    <td>Shared code</td>
+    <td>31337157</td>
     <td>❌</td>
   </tr>
   </tbody>

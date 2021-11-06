@@ -71,3 +71,97 @@ nop 2
 returnhere:
 ```
 ### Step 8.
+Para el paso 8, entramos un tema de los mas comunes en los videojuegos, es casi una norma que esto siempre lo veremos y siempre ocurrira para algún valor, los punteros multinivel, mas concretamente, aunque el propio tutorial lo dice, es de 4 niveles. En este ejercicio se usara la siguiente plantilla.
+```asm
+Address = Value = ?
+
+base ptr -> address + offset4 = address
+
+base ptr -> address + offset3 = address
+
+base ptr -> address + offset2 = address
+
+static base -> address + offset1 = address
+```
+
+Paso a explicar paso a paso como llenarla, se entiende que la primera linea `address value = ?` Es la posición actual de memoria, lo iré haciendo de acuerdo a los datos que me salen a mi en este momento, pero si sigues este tut, lo mas probable es que te aparezcan otros números de otra manera a ti.
+
+Empecemos, primero busquemos el valor como de costumbre y su posición de memoria, una vez encontramos empezamos a llenar la plantilla
+```c++
+Address = Value = 018A3678
+```
+
+Como abra pasado contigo, si intentamos buscar que posición de memoria tiene a `018A3678` no encontramos nada, de esa manera entendemos que es un puntero multinivel. Click derecho y buscamos que tipo de dato accede `find out what accesses this address` Al activar el boton de cambiar valor en el programa, arroja dos lineas
+
+```asm
+0042843E - 89 46 18  - mov [esi+18],eax
+00428449 - 8B 46 18  - mov eax,[esi+18]
+```
+
+En este caso vemos la persistencia del esi+18 que se repite, este 18 se representa como 0x18 y es un offset. Un offset es un salto o una distancia entre dos posiciones de memoria, entendemos ademas por el mov, que se esta moviendo cierta información a esi+offset. Seguimos llenando la plantilla y en la siguiente linea nos da de esta manera.
+
+
+```c++
+base ptr -> address + 0x18 = 018A3678
+```
+Si cambiamos el valor de la igualdad, restamos 018A3678-18 nos da como resultado `18A 3660` y de ahí obtienes el valor del addres que falta. De hecho, en realidad si nos fijamos en el propio valor que incorpora cheat engine en ESI, dentro de la pantalla de accesses this address tiene ese mismo valor
+
+```c++
+base ptr -> 18A3660 + 0x18 = 018A3678
+```
+
+Solo falta tener el base ptr, que es el puntero en si, ya en este punto esta mucho mas fácil, porque en realidad debemos entender que, el valor del base ptr es el address sin la suma del offset, es decir, existe una posición de memoria (ESI en este caso) que se le suma un offset. Entonces para este caso, debemos buscar que posición de memoria tiene contenido a 18A3660. Lo buscamos de la manera tradicional en cheat engine y obtenemos 0182BC20. De esta manera finalmente podemos llenar la primera fila de nuestra plantilla he iniciando la segunda fila, de esta manera
+
+```c++
+Address = Value = 018A3678
+0182BC20 -> 18A3660 + 0x18 = 018A3678
+base ptr -> address + offset3 = 0182BC20
+```
+
+Lo siguiente sera repetir el mismo procedimiento las veces que sean necesarias, en un videojuego real, suele ser mas difícil ya que hay punteros multinivel con cantidades increíbles de saltos en la memoria (he visto hasta 30 pero seguro hay mas). Por lo que este es un procedimiento que hay que hacerse con mucha paciencia y probando enorme cantidad de veces.
+
+Para ir avanzando un poco mas rápido, simplemente se repite el procedimiento y vemos en la segunda linea el offset es 0, por o que el address permanece igual, así que buscamos ese nuevo valor en el siguiente puntero, quedando asi.
+
+```c++
+Address = Value = 018A3678
+0182BC20 -> 18A3660 + 0x18 = 018A3678
+0184B264 -> 0182BC20 + 0 = 0182BC20
+018CB5DC -> 184B250 + 0x14 = 0184B264
+static base -> address + offset1 = 018CB5DC
+```
+
+Repite nuevamente el proceso, para esta tercera iteración me da el offset 14, por lo que repitiendo el mismo proceso, me arroja los siguientes resultados.
+
+```c++
+Address = Value = 018A3678
+0182BC20 -> 18A3660 + 0x18 = 018A3678
+0184B264 -> 0182BC20 + 0 = 0182BC20
+018CB5DC -> 184B250 + 0x14 = 0184B264
+static base -> address + offset1 = 018CB5DC
+```
+
+En esta ultima iteración, sabemos (porque asi nos lo dice el ejercicio) que sera el ultimo nivel del puntero, nuevamente repetimos el proceso, me arroja como valor en el offset 0C, y queda así.
+
+```c++
+Address = Value = 018A3678
+0182BC20 -> 18A3660 + 0x18 = 018A3678
+0184B264 -> 0182BC20 + 0 = 0182BC20
+018CB5DC -> 184B250 + 0x14 = 0184B264
+static base -> 18CB5D0 + 0C = 018CB5DC
+```
+
+Si buscamos esta posición de memoria, nos da como resultado que el static base es `"Tutorial-i386.exe"+2566E0` Este es el resultado que estábamos buscando!! es justo donde se inicia el puntero y no cambiara nunca por lo que este puntero es valido para cualquier persona, finalmente hemos llenado la plantilla.
+```c++
+Address = Value = 018A3678
+0182BC20 -> 18A3660 + 0x18 = 018A3678
+0184B264 -> 0182BC20 + 0 = 0182BC20
+018CB5DC -> 184B250 + 0x14 = 0184B264
+"Tutorial-i386.exe"+2566E0 -> 18CB5D0 + 0C = 018CB5DC
+```
+Sin embargo, esta es la posición de memoria, y no el valor que buscamos, por lo que ahora necesitamos el valor, es decir, lo que transfiere este puntero, nuevamente al igual que el paso 6 vamos a "add Address manually` seleccionamos pointer y ademas damos click donde dice add offset, en total debemos tener 4 cuatro campos que fue el caso para este ejercicio. Se ve muy similar a la plantilla que tenemos, por lo que ahora solo debemos llenar los campos en base a la plantilla.
+
+Con esto, finalizamos el ejercicio, bastante complejo pero muy apegado a la realidad de los punteros en desafíos reales. Debemos tildar con 5000 el valor y asi pasamos el paso final el step 9.
+
+### Step 9.
+
+### Step 9.

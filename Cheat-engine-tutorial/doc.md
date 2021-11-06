@@ -87,7 +87,7 @@ static base -> address + offset1 = address
 Paso a explicar paso a paso como llenarla, se entiende que la primera linea `address value = ?` Es la posición actual de memoria, lo iré haciendo de acuerdo a los datos que me salen a mi en este momento, pero si sigues este tut, lo mas probable es que te aparezcan otros números de otra manera a ti.
 
 Empecemos, primero busquemos el valor como de costumbre y su posición de memoria, una vez encontramos empezamos a llenar la plantilla
-```c++
+```asm
 Address = Value = 018A3678
 ```
 
@@ -101,18 +101,18 @@ Como abra pasado contigo, si intentamos buscar que posición de memoria tiene a 
 En este caso vemos la persistencia del esi+18 que se repite, este 18 se representa como 0x18 y es un offset. Un offset es un salto o una distancia entre dos posiciones de memoria, entendemos ademas por el mov, que se esta moviendo cierta información a esi+offset. Seguimos llenando la plantilla y en la siguiente linea nos da de esta manera.
 
 
-```c++
+```asm
 base ptr -> address + 0x18 = 018A3678
 ```
 Si cambiamos el valor de la igualdad, restamos 018A3678-18 nos da como resultado `18A 3660` y de ahí obtienes el valor del addres que falta. De hecho, en realidad si nos fijamos en el propio valor que incorpora cheat engine en ESI, dentro de la pantalla de accesses this address tiene ese mismo valor
 
-```c++
+```asm
 base ptr -> 18A3660 + 0x18 = 018A3678
 ```
 
 Solo falta tener el base ptr, que es el puntero en si, ya en este punto esta mucho mas fácil, porque en realidad debemos entender que, el valor del base ptr es el address sin la suma del offset, es decir, existe una posición de memoria (ESI en este caso) que se le suma un offset. Entonces para este caso, debemos buscar que posición de memoria tiene contenido a 18A3660. Lo buscamos de la manera tradicional en cheat engine y obtenemos 0182BC20. De esta manera finalmente podemos llenar la primera fila de nuestra plantilla he iniciando la segunda fila, de esta manera
 
-```c++
+```asm
 Address = Value = 018A3678
 0182BC20 -> 18A3660 + 0x18 = 018A3678
 base ptr -> address + offset3 = 0182BC20
@@ -122,17 +122,16 @@ Lo siguiente sera repetir el mismo procedimiento las veces que sean necesarias, 
 
 Para ir avanzando un poco mas rápido, simplemente se repite el procedimiento y vemos en la segunda linea el offset es 0, por o que el address permanece igual, así que buscamos ese nuevo valor en el siguiente puntero, quedando asi.
 
-```c++
+```asm
 Address = Value = 018A3678
 0182BC20 -> 18A3660 + 0x18 = 018A3678
 0184B264 -> 0182BC20 + 0 = 0182BC20
-018CB5DC -> 184B250 + 0x14 = 0184B264
-static base -> address + offset1 = 018CB5DC
+base ptr -> address + offset2 = 0184B264
 ```
 
 Repite nuevamente el proceso, para esta tercera iteración me da el offset 14, por lo que repitiendo el mismo proceso, me arroja los siguientes resultados.
 
-```c++
+```asm
 Address = Value = 018A3678
 0182BC20 -> 18A3660 + 0x18 = 018A3678
 0184B264 -> 0182BC20 + 0 = 0182BC20
@@ -142,7 +141,7 @@ static base -> address + offset1 = 018CB5DC
 
 En esta ultima iteración, sabemos (porque asi nos lo dice el ejercicio) que sera el ultimo nivel del puntero, nuevamente repetimos el proceso, me arroja como valor en el offset 0C, y queda así.
 
-```c++
+```asm
 Address = Value = 018A3678
 0182BC20 -> 18A3660 + 0x18 = 018A3678
 0184B264 -> 0182BC20 + 0 = 0182BC20
@@ -151,7 +150,7 @@ static base -> 18CB5D0 + 0C = 018CB5DC
 ```
 
 Si buscamos esta posición de memoria, nos da como resultado que el static base es `"Tutorial-i386.exe"+2566E0` Este es el resultado que estábamos buscando!! es justo donde se inicia el puntero y no cambiara nunca por lo que este puntero es valido para cualquier persona, finalmente hemos llenado la plantilla.
-```c++
+```asm
 Address = Value = 018A3678
 0182BC20 -> 18A3660 + 0x18 = 018A3678
 0184B264 -> 0182BC20 + 0 = 0182BC20

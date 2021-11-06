@@ -163,5 +163,3 @@ Sin embargo, esta es la posición de memoria, y no el valor que buscamos, por lo
 Con esto, finalizamos el ejercicio, bastante complejo pero muy apegado a la realidad de los punteros en desafíos reales. Debemos tildar con 5000 el valor y asi pasamos el paso final el step 9.
 
 ### Step 9.
-
-### Step 9.

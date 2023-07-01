@@ -1,6 +1,6 @@
 # Cheat engine tutorial (3.5)
 
-Todas las posiciones de memoria en doc.md se basan en la versión 3.5, si esta versión cambia es posible que sean otras posiciones de memoria, aunque los pasos sean iguales.
+Todas las posiciones de memoria en doc.md se basan en la versión 3.6, si esta versión cambia es posible que los scripts fallen.
 
 ### Tutorial-i386
 
@@ -60,7 +60,7 @@ Todas las posiciones de memoria en doc.md se basan en la versión 3.5, si esta v
     <td>Step 9</td>
     <td>Shared code</td>
     <td>31337157</td>
-    <td>❌</td>
+    <td>✅</td>
   </tr>
   </tbody>
  </table>

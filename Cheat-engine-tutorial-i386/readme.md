@@ -1,4 +1,4 @@
-# Cheat engine tutorial (3.5)
+# Cheat engine tutorial (3.6)
 
 Todas las posiciones de memoria en doc.md se basan en la versión 3.6, si esta versión cambia es posible que los scripts fallen.
 

@@ -1,6 +1,12 @@
 # Cheat engine tutorial (3.6)
 
-Todas las posiciones de memoria en doc.md se basan en la versión 3.6, si esta versión cambia es posible que los scripts fallen.
+### Ver video tutorial
+
+La grabación de este tutorial se encuentra en el canal de youtube paso a paso explicado. Accede al siguiente enlace para verlo: [Youtube Tutorial](https://www.youtube.com/playlist?list=PLaxa_U8maTJq4h2k64CE46b1ojlewCS8Y).
+
+### Aclaración
+
+Todas las posiciones de memoria en el tutorial se basan en la versión 3.6
 
 ### Tutorial-i386
 

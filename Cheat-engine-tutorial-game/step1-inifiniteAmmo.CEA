@@ -1,0 +1,69 @@
+{ Game       : CE Game tutorials
+  Version    : 1.0.0
+  Date       : 2023-07-01
+  Author     : Pedro Yanez
+  Github     : https://github.com/wotanCode
+  Repository : https://github.com/wotanCode/Cheat-Engine-tables-and-scripts
+  Description: Script for infinite ammo
+}
+
+[ENABLE]
+
+aobscanmodule(INJECT,gtutorial-x86_64.exe,83 43 6C 01 48 89 73 70) // should be unique
+alloc(newmem,$1000,INJECT)
+
+label(code)
+label(return)
+
+newmem:
+  mov [rbx+70],rsi
+  jmp return
+  jmp return
+
+code:
+  add dword ptr [rbx+6C],01
+  mov [rbx+70],rsi
+  jmp return
+
+INJECT:
+  jmp newmem
+  nop 3
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db 83 43 6C 01 48 89 73 70
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: gtutorial-x86_64.exe+3D1D9
+
+gtutorial-x86_64.exe+3D1B5: 48 8B 54 C3 38           - mov rdx,[rbx+rax*8+38]
+gtutorial-x86_64.exe+3D1BA: 48 8B 43 28              - mov rax,[rbx+28]
+gtutorial-x86_64.exe+3D1BE: 8B 40 28                 - mov eax,[rax+28]
+gtutorial-x86_64.exe+3D1C1: 89 42 28                 - mov [rdx+28],eax
+gtutorial-x86_64.exe+3D1C4: 44 89 E0                 - mov eax,r12d
+gtutorial-x86_64.exe+3D1C7: 48 8B 54 C3 38           - mov rdx,[rbx+rax*8+38]
+gtutorial-x86_64.exe+3D1CC: 48 8B 43 28              - mov rax,[rbx+28]
+gtutorial-x86_64.exe+3D1D0: 8B 40 34                 - mov eax,[rax+34]
+gtutorial-x86_64.exe+3D1D3: 89 42 34                 - mov [rdx+34],eax
+gtutorial-x86_64.exe+3D1D6: 41 B5 01                 - mov r13b,01
+// ---------- INJECTING HERE ----------
+gtutorial-x86_64.exe+3D1D9: 83 43 6C 01              - add dword ptr [rbx+6C],01
+// ---------- DONE INJECTING  ----------
+gtutorial-x86_64.exe+3D1DD: 48 89 73 70              - mov [rbx+70],rsi
+gtutorial-x86_64.exe+3D1E1: 48 63 43 6C              - movsxd  rax,dword ptr [rbx+6C]
+gtutorial-x86_64.exe+3D1E5: BA 05 00 00 00           - mov edx,00000005
+gtutorial-x86_64.exe+3D1EA: 48 29 C2                 - sub rdx,rax
+gtutorial-x86_64.exe+3D1ED: 48 89 55 E0              - mov [rbp-20],rdx
+gtutorial-x86_64.exe+3D1F1: 48 8D 45 E0              - lea rax,[rbp-20]
+gtutorial-x86_64.exe+3D1F5: 48 89 45 F0              - mov [rbp-10],rax
+gtutorial-x86_64.exe+3D1F9: 48 C7 45 E8 10 00 00 00  - mov qword ptr [rbp-18],00000010
+gtutorial-x86_64.exe+3D201: 4C 8D 45 E8              - lea r8,[rbp-18]
+gtutorial-x86_64.exe+3D205: 4D 31 C9                 - xor r9,r9
+}
+

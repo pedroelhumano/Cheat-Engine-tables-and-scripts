@@ -1,0 +1,76 @@
+{ Game       : CE Game tutorials
+  Version    : 1.0.0
+  Date       : 2023-07-01
+  Author     : Pedro Yanez
+  github     : https://github.com/wotanCode
+  Repository : https://github.com/wotanCode/Cheat-Engine-tables-and-scripts
+  Description: Script for godmode and autokill enemys
+}
+
+[ENABLE]
+
+aobscanmodule(INJECT,gtutorial-x86_64.exe,29 50 60 C3 00 00) // should be unique
+alloc(newmem,$1000,INJECT)
+
+label(code)
+label(return)
+label(godmode)
+
+newmem:
+
+code:
+  cmp [rax+70], 1
+  je godmode
+  // sub [rax+60],edx
+  ret 
+  add [rax],al
+  jmp return
+
+godmode:
+  mov [rax+60] 0
+  // sub [rax+60],edx
+  ret
+  add [rax],al
+  jmp return
+
+INJECT:
+  jmp newmem
+  nop
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db 29 50 60 C3 00 00
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: gtutorial-x86_64.exe+400E3
+
+gtutorial-x86_64.exe+400CB: 90                 - nop 
+gtutorial-x86_64.exe+400CC: 90                 - nop 
+gtutorial-x86_64.exe+400CD: 66 0F 6F 74 24 20  - movdqa xmm6,[rsp+20]
+gtutorial-x86_64.exe+400D3: 48 8D 64 24 30     - lea rsp,[rsp+30]
+gtutorial-x86_64.exe+400D8: 5B                 - pop rbx
+gtutorial-x86_64.exe+400D9: C3                 - ret 
+gtutorial-x86_64.exe+400DA: 00 00              - add [rax],al
+gtutorial-x86_64.exe+400DC: 00 00              - add [rax],al
+gtutorial-x86_64.exe+400DE: 00 00              - add [rax],al
+gtutorial-x86_64.exe+400E0: 48 89 C8           - mov rax,rcx
+// ---------- INJECTING HERE ----------
+gtutorial-x86_64.exe+400E3: 29 50 60           - sub [rax+60],edx
+// ---------- DONE INJECTING  ----------
+gtutorial-x86_64.exe+400E6: C3                 - ret 
+gtutorial-x86_64.exe+400E7: 00 00              - add [rax],al
+gtutorial-x86_64.exe+400E9: 00 00              - add [rax],al
+gtutorial-x86_64.exe+400EB: 00 00              - add [rax],al
+gtutorial-x86_64.exe+400ED: 00 00              - add [rax],al
+gtutorial-x86_64.exe+400EF: 00 53 56           - add [rbx+56],dl
+gtutorial-x86_64.exe+400F2: 48 8D 64 24 D8     - lea rsp,[rsp-28]
+gtutorial-x86_64.exe+400F7: 48 89 CB           - mov rbx,rcx
+gtutorial-x86_64.exe+400FA: 48 89 D6           - mov rsi,rdx
+gtutorial-x86_64.exe+400FD: 48 85 F6           - test rsi,rsi
+}

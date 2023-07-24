@@ -153,6 +153,78 @@ gtutorial-x86_64.exe+400FD: 48 85 F6           - test rsi,rsi
 }
 </AssemblerScript>
     </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"step3-godmode"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game       : CE Game tutorials
+  Version    : 1.0.0
+  Date       : 2023-07-01
+  Author     : Pedro Yanez
+  github     : https://github.com/wotanCode
+  Repository : https://github.com/wotanCode/Cheat-Engine-tables-and-scripts
+  Description: Script for godmode
+}
+
+[ENABLE]
+
+aobscanmodule(INJECT,gtutorial-x86_64.exe,74 13 48 8B 4B 28) // should be unique
+alloc(newmem,$1000,INJECT)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  jmp gtutorial-x86_64.exe+4139C
+  mov rcx,[rbx+28]
+  jmp return
+
+INJECT:
+  jmp newmem
+  nop
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db 74 13 48 8B 4B 28
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: gtutorial-x86_64.exe+41387
+
+gtutorial-x86_64.exe+41362: 48 8B 53 38        - mov rdx,[rbx+38]
+gtutorial-x86_64.exe+41366: 49 63 C4           - movsxd  rax,r12d
+gtutorial-x86_64.exe+41369: 48 8B 0C C2        - mov rcx,[rdx+rax*8]
+gtutorial-x86_64.exe+4136D: 48 8B 53 28        - mov rdx,[rbx+28]
+gtutorial-x86_64.exe+41371: 4C 8B 43 38        - mov r8,[rbx+38]
+gtutorial-x86_64.exe+41375: 49 63 C4           - movsxd  rax,r12d
+gtutorial-x86_64.exe+41378: 49 8B 04 C0        - mov rax,[r8+rax*8]
+gtutorial-x86_64.exe+4137C: 48 8B 00           - mov rax,[rax]
+gtutorial-x86_64.exe+4137F: FF 90 28 01 00 00  - call qword ptr [rax+00000128]
+gtutorial-x86_64.exe+41385: 84 C0              - test al,al
+// ---------- INJECTING HERE ----------
+gtutorial-x86_64.exe+41387: 74 13              - je gtutorial-x86_64.exe+4139C
+// ---------- DONE INJECTING  ----------
+gtutorial-x86_64.exe+41389: 48 8B 4B 28        - mov rcx,[rbx+28]
+gtutorial-x86_64.exe+4138D: 48 8B 43 28        - mov rax,[rbx+28]
+gtutorial-x86_64.exe+41391: 48 8B 00           - mov rax,[rax]
+gtutorial-x86_64.exe+41394: FF 90 20 01 00 00  - call qword ptr [rax+00000120]
+gtutorial-x86_64.exe+4139A: 66 90              - nop 2
+gtutorial-x86_64.exe+4139C: 48 8B 53 38        - mov rdx,[rbx+38]
+gtutorial-x86_64.exe+413A0: 49 63 C4           - movsxd  rax,r12d
+gtutorial-x86_64.exe+413A3: 48 8B 0C C2        - mov rcx,[rdx+rax*8]
+gtutorial-x86_64.exe+413A7: E8 24 9B FF FF     - call gtutorial-x86_64.exe+3AED0
+gtutorial-x86_64.exe+413AC: 84 C0              - test al,al
+}
+
+</AssemblerScript>
+    </CheatEntry>
   </CheatEntries>
   <UserdefinedSymbols/>
   <Structures StructVersion="2">
